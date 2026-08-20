@@ -171,11 +171,6 @@ local function broadcastChannelMembers(channel)
     end
 end
 
----Update frequency metadata on one radio only (never wipe other radios).
----@param src number
----@param channel number
----@param radioId? string
----@return string|nil appliedRadioId
 local function setRadioItemFrequency(src, channel, radioId)
     local slots = ox_inventory:Search(src, 'slots', 'radio')
     if type(slots) ~= 'table' then return nil end
@@ -209,7 +204,6 @@ local function setRadioItemFrequency(src, channel, radioId)
         return nil
     end
 
-    -- Joining without a specific radio: bind the first radio only
     if channel > 0 then
         for _, item in pairs(slots) do
             if item.slot then
@@ -278,8 +272,6 @@ local function refreshPlayerShadow(src)
         return
     end
 
-    -- Always refresh (eligibility can flip independently of invisible, e.g. an
-    -- opted-out player picking up/dropping the shadow module).
     setShadowState(src, invisible)
 
     if data.invisible == invisible then return end
@@ -376,8 +368,6 @@ RegisterNetEvent('at-radio:server:openRadioStorage', function(slot)
 
     local opened = ox_inventory:forceOpenInventory(src, 'stash', stashId)
     if not opened then
-        -- Match fd_laptop's fallback when the inventory is already focused or
-        -- forceOpenInventory loses a close/open race.
         TriggerClientEvent('at-radio:client:openRadioStorage', src, stashId)
     end
 end)
@@ -404,7 +394,6 @@ RegisterNetEvent('at-radio:server:setTalking', function(talking)
     if not data.invisible then
         broadcastChannelMembers(data.channel)
     else
-        -- Invisible talkers still update their own UI
         TriggerClientEvent('at-radio:client:setMembers', src, buildMemberList(src, data.channel))
     end
 end)
@@ -449,7 +438,6 @@ AddEventHandler('QBCore:Server:OnJobUpdate', function(src)
     refreshPlayerShadow(src)
 end)
 
----Lets an eligible player (job or shadow_module item) choose to be visible anyway.
 RegisterNetEvent('at-radio:server:setShadowOptOut', function(optOut)
     local src = source
     shadowOptOut[src] = optOut == true or nil
