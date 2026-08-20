@@ -1,0 +1,15 @@
+{
+    "not_on_channel": "Nie znajdujesz się na tym kanale",
+    "on_channel": "Znajdujesz się już na tym kanale",
+    "joined_radio": "Podłączono do: ",
+    "restricted_channel": "Nie można połączyć się z tym kanałem",
+    "invalid_channel": "Ta częstotliwość jest niedostępna",
+    "left_channel": "Opuszczono kanał",
+    "min_volume": "Głośność radia jest już ustawiona na minimum",
+    "max_volume": "Głośność radia jest już ustawiona na maksimum",
+    "new_volume": "Nowa głośność: ",
+    "new_channel": "Nowy kanał: ",
+    "clicksOn": "Kliknięcia mikrofonu są teraz włączone",
+    "clicksOff": "Kliknięcia mikrofonu są teraz wyłączone",
+    "failed_spawn": "Nie udało się stworzyć obiektu radia"
+}

@@ -1,0 +1,68 @@
+@font-face {
+  font-family: 'Nexa-Book';
+  src: url('./fonts/Nexa-Book.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+html {
+  color-scheme: normal !important;
+}
+
+:root {
+  --ox-text: #c1c2c5;
+  --ox-text-muted: #909296;
+  --ox-text-dim: rgba(193, 194, 197, 0.6);
+  --ox-main: #1a1b1e;
+  --ox-secondary: rgba(34, 35, 38, 0.68);
+  --ox-secondary-highlight: #2c2e33;
+  --ox-card-bg: rgba(26, 27, 30, 0.96);
+  --ox-panel-bg: rgba(26, 27, 30, 0.96);
+  --ox-header-bg: rgba(37, 38, 43, 0.85);
+  --ox-header-bg-dark: rgba(44, 46, 51, 0.9);
+  --ox-border: rgba(255, 255, 255, 0.08);
+  --ox-border-strong: rgba(255, 255, 255, 0.1);
+  --ox-primary: #228be6;
+  --ox-success: #40c057;
+  --ox-warning: #fd7e14;
+  --ox-danger: #fa5252;
+  --ox-radius: 8px;
+  --ox-radius-sm: 4px;
+  --ox-shadow: 0 8px 32px rgba(0, 0, 0, 0.28);
+}
+
+body {
+  margin: 0;
+  background: none !important;
+  overflow: hidden !important;
+  font-family: 'Nexa-Book', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100vh;
+  box-sizing: border-box;
+  user-select: none;
+  color: var(--ox-text);
+}
+
+p {
+  margin: 0;
+}
+
+#root {
+  background: none !important;
+  overflow-y: hidden !important;
+  height: 100%;
+}
+
+code {
+  font-family: 'JetBrains Mono', 'Roboto Mono', source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+::-webkit-scrollbar {
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  width: 0;
+  height: 0;
+}

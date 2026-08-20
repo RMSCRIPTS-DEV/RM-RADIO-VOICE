@@ -1,0 +1,14 @@
+{
+    "not_on_channel": "Você não está conectado a um canal",
+    "on_channel": "Você já está conectado a este canal",
+    "joined_radio": "Você está conectado a: ",
+    "restricted_channel": "Você não pode se conectar a este canal",
+    "invalid_channel": "Esta frequência não está disponível",
+    "left_channel": "Você saiu do canal",
+    "min_volume": "O rádio já está definido para o volume mais baixo",
+    "max_volume": "O rádio já está definido para o volume máximo",
+    "new_volume": "Novo volume: ",
+    "new_channel": "Novo canal: ",
+    "clicksOn": "Cliques do microfone estão ligados agora",
+    "clicksOff": "Cliques do microfone estão desligados agora"
+}

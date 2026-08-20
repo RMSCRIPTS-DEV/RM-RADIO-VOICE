@@ -1,0 +1,15 @@
+{
+    "not_on_channel": "Herhangi bir kanala bağlı değilsin.",
+    "on_channel": "Bu kanala zaten bağlısın.",
+    "joined_radio": "Radyo'ya bağlandın: ",
+    "restricted_channel": "Bu kanala bağlanmana izin verilmiyor.",
+    "invalid_channel": "Bu frekans mevcut değil.",
+    "left_channel": "Kanaldan ayrıldın.",
+    "min_volume": "Radyo zaten en düşük ses seviyesinde.",
+    "max_volume": "Radyo zaten maksimum ses seviyesinde.",
+    "new_volume": "Yeni ses seviyesi: ",
+    "new_channel": "Yeni kanal: ",
+    "clicksOn": "Mikrofon tıklamaları artık açık.",
+    "clicksOff": "Mikrofon tıklamaları artık kapalı.",
+    "failed_spawn": "Radyo nesnesi oluşturulamadı."
+}

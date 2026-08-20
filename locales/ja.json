@@ -1,0 +1,14 @@
+{
+    "not_on_channel": "現在チャンネルに接続していません",
+    "on_channel": "既にこのチャンネルに接続しています",
+    "joined_radio": "接続したチャンネル: ",
+    "restricted_channel": "このチャンネルには接続できません",
+    "invalid_channel": "この周波数は利用できません",
+    "left_channel": "チャンネルから退出しました",
+    "min_volume": "無線の音量は既にに最小です",
+    "max_volume": "無線の音量は既にに最大です",
+    "new_volume": "新しい音量: ",
+    "new_channel": "新しいチャンネル: ",
+    "clicksOn": "マイクのクリック音がオンになりました",
+    "clicksOff": "マイクのクリック音がオフになりました"
+}

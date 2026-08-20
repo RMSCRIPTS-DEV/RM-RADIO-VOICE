@@ -1,0 +1,1278 @@
+.radio-shell {
+  position: fixed;
+  top: 2.5vh;
+  right: 1.75vw;
+  height: min(740px, calc(100vh - 5vh));
+  max-height: calc(100vh - 5vh);
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  transform: translateX(calc(100% + 2vw));
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+  transition:
+    transform 300ms ease,
+    opacity 300ms ease;
+  z-index: 50;
+}
+
+.radio-shell--open {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.radio-panel {
+  width: min(380px, 24vw);
+  min-width: 320px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--ox-card-bg);
+  border: 1px solid var(--ox-border);
+  border-radius: var(--ox-radius);
+  box-shadow: var(--ox-shadow);
+  overflow: hidden;
+  color: var(--ox-text);
+}
+
+.radio-side {
+  width: min(340px, 28vw);
+  min-width: 260px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--ox-card-bg);
+  border: 1px solid var(--ox-border);
+  border-radius: var(--ox-radius);
+  box-shadow: var(--ox-shadow);
+  overflow: hidden;
+  color: var(--ox-text);
+  animation: radioPanelIn 220ms ease;
+}
+
+.radio-side--members {
+  width: min(240px, 18vw);
+  min-width: 200px;
+}
+
+@keyframes radioPanelIn {
+  from {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.radio-panel__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 16px 14px;
+  border-bottom: 1px solid var(--ox-border);
+  flex-shrink: 0;
+}
+
+.radio-panel__header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.radio-panel__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--ox-radius-sm);
+  background: var(--ox-header-bg-dark);
+  border: 1px solid var(--ox-border);
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.radio-panel__header-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.radio-panel__title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.radio-panel__subtitle {
+  margin: 3px 0 0;
+  font-size: 12px;
+  color: var(--ox-text-dim);
+}
+
+.radio-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--ox-text);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.12s ease;
+}
+
+.radio-btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.radio-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.radio-btn--icon {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--ox-radius-sm);
+  background: var(--ox-secondary);
+  border-color: var(--ox-border);
+  color: var(--ox-text-muted);
+}
+
+.radio-btn--icon:hover:not(:disabled) {
+  background: var(--ox-secondary-highlight);
+  border-color: var(--ox-border-strong);
+  color: #fff;
+}
+
+.radio-btn--round {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+.radio-btn--power {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--ox-radius-sm);
+  background: rgba(250, 82, 82, 0.14);
+  border-color: rgba(250, 82, 82, 0.35);
+  color: var(--ox-danger);
+  box-shadow: 0 0 0 1px rgba(250, 82, 82, 0.08);
+}
+
+.radio-btn--power:hover:not(:disabled) {
+  background: rgba(250, 82, 82, 0.28);
+  border-color: rgba(250, 82, 82, 0.55);
+  color: var(--ox-danger);
+}
+
+.radio-btn--power-on {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--ox-radius-sm);
+  background: rgba(64, 192, 87, 0.14);
+  border-color: rgba(64, 192, 87, 0.35);
+  color: var(--ox-success);
+  box-shadow: 0 0 0 1px rgba(64, 192, 87, 0.08);
+}
+
+.radio-btn--power-on:hover:not(:disabled) {
+  background: rgba(64, 192, 87, 0.28);
+  border-color: rgba(64, 192, 87, 0.55);
+  color: var(--ox-success);
+}
+
+.radio-btn--join {
+  min-width: 78px;
+  height: 38px;
+  padding: 0 16px;
+  border-radius: var(--ox-radius-sm);
+  background: linear-gradient(180deg, #7c6af5 0%, #5b4bdb 100%);
+  border-color: rgba(124, 106, 245, 0.55);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(91, 75, 219, 0.28);
+}
+
+.radio-btn--join:hover:not(:disabled) {
+  background: linear-gradient(180deg, #8b7aff 0%, #6756e8 100%);
+  color: #fff;
+}
+
+.radio-btn--mic {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--ox-radius-sm);
+  background: rgba(34, 139, 230, 0.18);
+  border-color: rgba(34, 139, 230, 0.4);
+  color: var(--ox-primary);
+}
+
+.radio-btn--mic:hover:not(:disabled),
+.radio-btn--icon.radio-btn--mic:hover:not(:disabled) {
+  background: rgba(34, 139, 230, 0.28);
+  border-color: rgba(34, 139, 230, 0.55);
+  color: var(--ox-primary);
+}
+
+.radio-btn--mic-off {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--ox-radius-sm);
+  background: rgba(250, 82, 82, 0.14);
+  border-color: rgba(250, 82, 82, 0.35);
+  color: var(--ox-danger);
+}
+
+.radio-btn--mic-off:hover:not(:disabled),
+.radio-btn--icon.radio-btn--mic-off:hover:not(:disabled) {
+  background: rgba(250, 82, 82, 0.28);
+  border-color: rgba(250, 82, 82, 0.55);
+  color: var(--ox-danger);
+}
+
+.radio-btn--hangup {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ox-radius-sm);
+  background: rgba(250, 82, 82, 0.16);
+  border-color: rgba(250, 82, 82, 0.4);
+  color: var(--ox-danger);
+  flex-shrink: 0;
+}
+
+.radio-btn--hangup:hover:not(:disabled) {
+  background: rgba(250, 82, 82, 0.28);
+  border-color: rgba(250, 82, 82, 0.55);
+  color: var(--ox-danger);
+}
+
+.radio-btn--ghost-active {
+  background: rgba(34, 139, 230, 0.14);
+  border-color: rgba(34, 139, 230, 0.35);
+  color: var(--ox-primary);
+}
+
+.radio-btn--ghost-active:hover:not(:disabled),
+.radio-btn--icon.radio-btn--ghost-active:hover:not(:disabled) {
+  background: rgba(34, 139, 230, 0.28);
+  border-color: rgba(34, 139, 230, 0.55);
+  color: var(--ox-primary);
+}
+
+.radio-tabs {
+  display: grid;
+  grid-template-columns: 42px 1fr 1fr;
+  gap: 0;
+  padding: 0 12px;
+  border-bottom: 1px solid var(--ox-border);
+  flex-shrink: 0;
+}
+
+.radio-tabs--two {
+  grid-template-columns: 1fr 1fr;
+}
+
+.radio-tabs__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 8px;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: var(--ox-text-muted);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.radio-tabs__item:hover {
+  color: #fff;
+}
+
+.radio-tabs__item--active {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
+.radio-tabs__item--icon {
+  width: 42px;
+  padding: 0;
+}
+
+.radio-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 14px;
+  flex-shrink: 0;
+}
+
+.radio-search-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 6px;
+  align-items: center;
+}
+
+.radio-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  height: 38px;
+  padding: 0 12px;
+  background: var(--ox-secondary);
+  border: 1px solid var(--ox-border);
+  border-radius: var(--ox-radius-sm);
+  color: #fff;
+  font-family: inherit;
+  font-size: 12px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.radio-field--square {
+  border-radius: var(--ox-radius-sm);
+}
+
+.radio-dropdown {
+  position: relative;
+  width: 100%;
+}
+
+.radio-dropdown__trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  height: 38px;
+  padding: 0 10px;
+  background: var(--ox-secondary);
+  border: 1px solid var(--ox-border);
+  border-radius: var(--ox-radius-sm);
+  color: #fff;
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.radio-dropdown__trigger:hover,
+.radio-dropdown__trigger--open {
+  background: var(--ox-secondary-highlight);
+  border-color: rgba(34, 139, 230, 0.45);
+}
+
+.radio-dropdown__value {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.radio-dropdown__menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px;
+  background: var(--ox-card-bg);
+  border: 1px solid var(--ox-border);
+  border-radius: var(--ox-radius-sm);
+  box-shadow: var(--ox-shadow);
+}
+
+.radio-dropdown__option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 8px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--ox-radius-sm);
+  color: var(--ox-text);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.radio-dropdown__option:hover {
+  background: rgba(34, 139, 230, 0.12);
+  border-color: rgba(34, 139, 230, 0.25);
+  color: #fff;
+}
+
+.radio-dropdown__option--active {
+  background: rgba(34, 139, 230, 0.18);
+  border-color: rgba(34, 139, 230, 0.35);
+  color: #fff;
+}
+
+.radio-user-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--ox-radius-sm);
+  background: var(--ox-header-bg-dark);
+  border: 1px solid var(--ox-border);
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.radio-user-icon--sm {
+  width: 24px;
+  height: 24px;
+}
+
+.radio-field:focus {
+  border-color: rgba(34, 139, 230, 0.45);
+  background: var(--ox-secondary-highlight);
+}
+
+.radio-field::placeholder {
+  color: var(--ox-text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+
+.radio-search-wrap {
+  position: relative;
+}
+
+.radio-search-wrap svg {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ox-text-muted);
+  pointer-events: none;
+}
+
+.radio-search-wrap .radio-field {
+  padding-left: 34px;
+}
+
+.radio-join-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.radio-join-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+}
+
+.radio-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 0 12px 12px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.radio-category-add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 34px;
+  padding: 0 10px;
+  background: var(--ox-secondary);
+  border: 1px dashed var(--ox-border-strong);
+  border-radius: var(--ox-radius-sm);
+  color: var(--ox-text-muted);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.radio-category-add:hover,
+.radio-category-add--active {
+  background: var(--ox-secondary-highlight);
+  color: #fff;
+  border-color: rgba(34, 139, 230, 0.35);
+}
+
+.radio-category {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.radio-category__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 4px;
+}
+
+.radio-category__empty {
+  padding: 8px 10px 10px 38px;
+  font-size: 11px;
+  color: var(--ox-text-muted);
+}
+
+.radio-category__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--ox-radius-sm);
+  background: rgba(64, 192, 87, 0.12);
+  border: 1px solid rgba(64, 192, 87, 0.28);
+  color: var(--ox-success);
+  flex-shrink: 0;
+}
+
+.radio-category__name {
+  flex: 1;
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.radio-category__rename {
+  flex: 1;
+  height: 28px;
+  min-width: 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.radio-channel {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--ox-radius-sm);
+  overflow: hidden;
+}
+
+.radio-channel__row {
+  display: flex;
+  align-items: stretch;
+  border-left: 3px solid transparent;
+  border-radius: var(--ox-radius-sm);
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.radio-channel__row:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.radio-channel--active .radio-channel__row {
+  background: rgba(64, 192, 87, 0.08);
+  border-left-color: var(--ox-success);
+}
+
+.radio-channel__main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+  padding: 9px 8px 9px 10px;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.radio-channel__remove {
+  width: 28px !important;
+  height: 28px !important;
+  margin: auto 6px auto 0;
+  flex-shrink: 0;
+  color: var(--ox-text-muted);
+}
+
+.radio-channel__remove:hover:not(:disabled),
+.radio-btn--icon.radio-channel__remove:hover:not(:disabled) {
+  background: rgba(250, 82, 82, 0.18);
+  border-color: rgba(250, 82, 82, 0.4);
+  color: var(--ox-danger);
+}
+
+.radio-channel__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--ox-radius-sm);
+  background: var(--ox-header-bg-dark);
+  color: var(--ox-text-muted);
+  flex-shrink: 0;
+}
+
+.radio-channel--active .radio-channel__icon {
+  color: var(--ox-success);
+  background: rgba(64, 192, 87, 0.12);
+}
+
+.radio-channel__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.radio-channel__name {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ox-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.radio-channel--active .radio-channel__name {
+  color: var(--ox-success);
+}
+
+.radio-channel__freq {
+  flex-shrink: 0;
+  min-width: 44px;
+  padding: 4px 8px;
+  border-radius: var(--ox-radius-sm);
+  background: var(--ox-header-bg-dark);
+  border: 1px solid var(--ox-border);
+  color: var(--ox-text-muted);
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.radio-channel--active .radio-channel__freq {
+  color: var(--ox-success);
+  background: rgba(64, 192, 87, 0.12);
+  border-color: rgba(64, 192, 87, 0.28);
+}
+
+.radio-channel__member {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 2px 0 4px 38px;
+  padding: 6px 8px;
+  border-radius: var(--ox-radius-sm);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid transparent;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.radio-channel__member--talking {
+  background: rgba(64, 192, 87, 0.12);
+  border-color: rgba(64, 192, 87, 0.3);
+}
+
+.radio-channel__member--talking .radio-user-icon {
+  color: var(--ox-success);
+  background: rgba(64, 192, 87, 0.14);
+  border-color: rgba(64, 192, 87, 0.35);
+  animation: radioTalkPulse 1.2s ease-in-out infinite;
+}
+
+.radio-channel__member--talking .radio-channel__member-name {
+  color: var(--ox-success);
+}
+
+.radio-channel__member-name {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: 12px;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.radio-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  border-radius: var(--ox-radius-sm);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--ox-border);
+  color: var(--ox-text-muted);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.radio-tag--green {
+  background: rgba(64, 192, 87, 0.12);
+  border-color: rgba(64, 192, 87, 0.28);
+  color: var(--ox-success);
+}
+
+.radio-talking-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--ox-radius-sm);
+  background: rgba(64, 192, 87, 0.16);
+  border: 1px solid rgba(64, 192, 87, 0.4);
+  color: var(--ox-success);
+  flex-shrink: 0;
+  animation: radioTalkPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes radioTalkPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+.radio-empty {
+  padding: 28px 12px;
+  text-align: center;
+  color: var(--ox-text-muted);
+  font-size: 13px;
+}
+
+.radio-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 14px;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.radio-setting {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px;
+  background: var(--ox-secondary);
+  border: 1px solid var(--ox-border);
+  border-radius: var(--ox-radius-sm);
+}
+
+.radio-setting--column {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.radio-setting--disabled {
+  opacity: 0.55;
+}
+
+.radio-setting__title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.radio-setting__desc {
+  margin: 3px 0 0;
+  font-size: 11px;
+  color: var(--ox-text-dim);
+}
+
+.radio-volume {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.radio-volume__value {
+  min-width: 40px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+
+.radio-toggle {
+  position: relative;
+  width: 42px;
+  height: 24px;
+  border-radius: 999px;
+  border: 1px solid var(--ox-border);
+  background: var(--ox-header-bg-dark);
+  cursor: pointer;
+  padding: 0;
+}
+
+.radio-toggle--on {
+  background: rgba(34, 139, 230, 0.25);
+  border-color: rgba(34, 139, 230, 0.45);
+}
+
+.radio-toggle__knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.15s ease;
+}
+
+.radio-toggle--on .radio-toggle__knob {
+  transform: translateX(18px);
+  background: var(--ox-primary);
+}
+
+.radio-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 12px;
+  padding: 10px 12px;
+  border-radius: var(--ox-radius-sm);
+  background: rgba(64, 192, 87, 0.1);
+  border: 1px solid rgba(64, 192, 87, 0.28);
+  flex-shrink: 0;
+}
+
+.radio-status--off {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: var(--ox-border);
+}
+
+.radio-status__icon {
+  display: flex;
+  color: var(--ox-success);
+}
+
+.radio-status--off .radio-status__icon {
+  color: var(--ox-text-muted);
+}
+
+.radio-status__text {
+  flex: 1;
+  min-width: 0;
+}
+
+.radio-status__title {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ox-success);
+}
+
+.radio-status--off .radio-status__title {
+  color: var(--ox-text-muted);
+}
+
+.radio-status__channel {
+  margin: 2px 0 0;
+  font-size: 11px;
+  color: var(--ox-text-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.radio-userbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 12px 14px;
+  border-top: 1px solid var(--ox-border);
+  background: var(--ox-header-bg);
+  flex-shrink: 0;
+}
+
+.radio-userbar__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--ox-radius-sm);
+  background: var(--ox-header-bg-dark);
+  border: 1px solid var(--ox-border);
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.radio-userbar__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.radio-userbar__name {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.radio-userbar__tag {
+  margin: 2px 0 0;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ox-text-muted);
+}
+
+.radio-userbar__controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* Chat panel */
+.radio-chat__header,
+.radio-members__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 14px 12px;
+  border-bottom: 1px solid var(--ox-border);
+  flex-shrink: 0;
+}
+
+.radio-chat__title,
+.radio-members__title {
+  margin: 0;
+  flex: 1;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.radio-chat__hash {
+  color: var(--ox-text-muted);
+  margin-right: 4px;
+}
+
+.radio-chat__messages {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.radio-chat__msg-author {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.radio-chat__msg-author--self {
+  color: var(--ox-primary);
+}
+
+.radio-chat__msg-text {
+  margin: 3px 0 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--ox-text);
+  word-break: break-word;
+}
+
+.radio-chat__input-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  padding: 12px 14px;
+  border-top: 1px solid var(--ox-border);
+  flex-shrink: 0;
+}
+
+.radio-chat__input-row .radio-field {
+  border-radius: var(--ox-radius-sm);
+}
+
+.radio-members__list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.radio-members__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  border-radius: var(--ox-radius-sm);
+  transition: background 0.15s ease;
+}
+
+.radio-members__item:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.radio-members__item--talking {
+  background: rgba(64, 192, 87, 0.08);
+}
+
+.radio-members__name {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.radio-members__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ox-text-muted);
+  flex-shrink: 0;
+}
+
+.radio-members__dot--talking {
+  background: var(--ox-success);
+  box-shadow: 0 0 8px rgba(64, 192, 87, 0.55);
+}
+
+/* Compact HUD when menu closed / connected */
+.radio-hud {
+  position: fixed;
+  top: 2.5vh;
+  left: 1vw;
+  width: min(240px, 20vw);
+  height: auto;
+  max-height: none;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 12px;
+  background: rgba(26, 27, 30, 0.92);
+  border: 1px solid var(--ox-border);
+  border-radius: var(--ox-radius);
+  box-shadow: var(--ox-shadow);
+  color: var(--ox-text);
+  z-index: 40;
+  pointer-events: none;
+  overflow: visible;
+  animation: radioPanelIn 200ms ease;
+}
+
+.radio-hud__top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--ox-border);
+}
+
+.radio-hud__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--ox-radius-sm);
+  background: var(--ox-header-bg-dark);
+  border: 1px solid var(--ox-border);
+  color: var(--ox-primary);
+  flex-shrink: 0;
+}
+
+.radio-hud__icon--sm {
+  width: 24px;
+  height: 24px;
+}
+
+.radio-hud__member--talking .radio-hud__icon {
+  color: var(--ox-success);
+  background: rgba(64, 192, 87, 0.12);
+  border-color: rgba(64, 192, 87, 0.28);
+}
+
+.radio-hud__channel {
+  margin: 0;
+  flex: 1;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.radio-hud__count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 24px;
+  padding: 0 6px;
+  border-radius: var(--ox-radius-sm);
+  background: var(--ox-secondary-highlight);
+  border: 1px solid var(--ox-border-strong);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+.radio-hud__members {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+  overflow: visible;
+}
+
+.radio-hud__empty {
+  margin: 0;
+  padding: 6px 0;
+  font-size: 11px;
+  color: var(--ox-text-muted);
+}
+
+.radio-hud__member {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 2px;
+  border-radius: var(--ox-radius-sm);
+  color: var(--ox-text-dim);
+  font-size: 11px;
+}
+
+.radio-hud__member--talking {
+  color: var(--ox-success);
+  background: rgba(64, 192, 87, 0.12);
+  border: 1px solid rgba(64, 192, 87, 0.28);
+}
+
+.radio-hud__member-name {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 600;
+  color: inherit;
+}
+
+@media (max-width: 1100px) {
+  .radio-shell {
+    right: 12px;
+    top: 12px;
+    height: calc(100vh - 24px);
+  }
+
+  .radio-panel {
+    width: min(360px, calc(100vw - 24px));
+    min-width: 0;
+  }
+
+  .radio-side {
+    display: none;
+  }
+
+  .radio-shell--chat .radio-side--chat {
+    display: flex;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    min-width: 0;
+    z-index: 2;
+  }
+
+  .radio-hud {
+    top: 12px;
+    left: 12px;
+  }
+}
