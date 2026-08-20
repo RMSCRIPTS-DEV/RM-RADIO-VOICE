@@ -94,10 +94,9 @@ end)
 
 local RADIO_ANIM_DICT = 'random@arrests'
 local RADIO_ANIM_CLIP = 'generic_radio_chatter'
--- Same dict/family as talk so the prop stays in the left hand
 local MENU_ANIM_DICT = 'random@arrests'
 local MENU_ANIM_CLIP = 'generic_radio_enter'
-local RADIO_BONE = 18905 -- SKEL_L_Hand (left hand, correct face for radio prop)
+local RADIO_BONE = 18905
 
 local function getPlayerName()
     local playerData = QBX and QBX.PlayerData
@@ -243,7 +242,6 @@ lib.callback.register('at-radio:client:getCurrentChannel', function()
     }
 end)
 
--- We drive talk anim + prop ourselves so it always shows while transmitting
 CreateThread(function()
     pcall(function()
         exports['pma-voice']:setRadioTalkAnim(RADIO_ANIM_DICT, RADIO_ANIM_CLIP)
@@ -260,7 +258,6 @@ AddEventHandler('pma-voice:radioActive', function(active)
 
         isTalkingOnRadio = true
         TriggerServerEvent('at-radio:server:setTalking', true)
-        -- Prop visible to others while transmitting
         setHoldingRadio(true)
         playTalkAnim()
         syncRadioState()
@@ -303,7 +300,6 @@ local function connectToRadio(channel)
     })
     exports['pma-voice']:setRadioChannel(channel)
     exports['pma-voice']:setVoiceProperty('radioEnabled', true)
-    -- Clear any disable bits that would block PTT
     pcall(function()
         exports['pma-voice']:removeRadioDisableBit(1)
     end)
@@ -370,7 +366,6 @@ RegisterNetEvent('at-radio:client:quickJoin', function(frequency)
     tryJoinFrequency(frequency, true)
 end)
 
----@param opts? { clearFrequency?: boolean, notify?: boolean }
 local function leaveChannel(opts)
     opts = opts or {}
     local clearFrequency = opts.clearFrequency ~= false
@@ -430,7 +425,6 @@ local function handleRadioInventoryChange()
 
     local activeExists = radioStillOwned(activeRadioId)
 
-    -- Dropped the radio you're using → transfer to another radio that has a saved frequency
     if (onChannel or radioChannel ~= 0) and activeRadioId and not activeExists then
         local fallback, fallbackFreq
         for i = 1, #radios do
@@ -454,7 +448,6 @@ local function handleRadioInventoryChange()
         return
     end
 
-    -- Picked up a radio with a saved frequency → auto-join only if not already on a channel
     if not onChannel or radioChannel == 0 then
         for i = 1, #radios do
             local freq = parseRadioFrequency(radios[i].metadata)
@@ -484,12 +477,10 @@ local function adjustRadioChannel(increment)
 
     local rchannel = radioChannel + increment
 
-    -- Skip restricted channels
     while sharedConfig.restrictedChannels[rchannel] do
         rchannel += increment
     end
     rchannel = math.min(math.max(rchannel, 1), config.maxFrequency)
-    -- Validate the new channel
     if not rchannel or type(rchannel) ~= "number" or rchannel > config.maxFrequency or rchannel < 1 then
         exports.qbx_core:Notify(locale('invalid_channel'), 'error')
         return false
@@ -497,13 +488,11 @@ local function adjustRadioChannel(increment)
 
     rchannel = qbx.math.round(rchannel, config.decimalPlaces)
 
-    -- Check if already on the channel
     if rchannel == radioChannel then
         exports.qbx_core:Notify(locale('on_channel'), 'error')
         return false
     end
 
-    -- Check restricted channel access
     local frequency = sharedConfig.whitelistSubChannels and rchannel or math.floor(rchannel)
     if sharedConfig.restrictedChannels[frequency] then
         local isJobAllowed = sharedConfig.restrictedChannels[frequency][QBX.PlayerData.job.name]
@@ -513,7 +502,6 @@ local function adjustRadioChannel(increment)
         end
     end
 
-    -- Set the new channel
     radioChannel = rchannel
     return true
 end
@@ -582,7 +570,6 @@ AddStateBagChangeHandler('isHoldingRadio', '', function(bagName, _, value)
 
         local coords = GetEntityCoords(ped)
         Radios[serverId] = CreateObject(model, coords.x, coords.y, coords.z, false, false, false)
-        -- Left hand walkie placement (face toward player, not flipped/upside down)
         AttachEntityToEntity(
             Radios[serverId],
             ped,
@@ -626,12 +613,10 @@ end
 
 exports('IsRadioOn', isRadioOn)
 
--- Sets mic clicks to the default value when the player logs in.
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
     exports['pma-voice']:setVoiceProperty("micClicks", config.defaultMicClicks)
 end)
 
--- Resets state on logout, in case of character change.
 RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
     if onRadio or onChannel or radioMenu then
         onRadio = false
@@ -670,7 +655,6 @@ RegisterNetEvent('qbx_radio:client:use', function()
     toggleRadio(not radioMenu)
 end)
 
---- ox_inventory client export (`client.export = 'at-radio.use'`)
 exports('use', function()
     toggleRadio(not radioMenu)
 end)
@@ -846,7 +830,6 @@ RegisterNUICallback('setAnonymous', function(data, cb)
     cb({ ok = true })
 end)
 
--- Eligibility/state can change while the menu is open (item added/removed, job change).
 AddStateBagChangeHandler('radioShadowEligible', ('player:%s'):format(cache.serverId), function()
     if radioMenu then syncRadioState() end
 end)
@@ -867,7 +850,6 @@ RegisterNUICallback('sendChatMessage', function(data, cb)
     end
 
     message = message:sub(1, 180)
-    -- Message is echoed by NUI immediately; sync to other players can be added later.
     cb({ ok = true })
 end)
 

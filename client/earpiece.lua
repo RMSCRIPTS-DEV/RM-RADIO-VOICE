@@ -1,8 +1,8 @@
 local config = require 'config.client'
 local sharedConfig = require 'config.shared'
 
-local overhearing = {} ---@type table<number, boolean>
-local activeTalkers = {} ---@type table<number, number> talkerServerId -> radioChannel
+local overhearing = {}
+local activeTalkers = {}
 local blockedProximityForEarpiece = false
 
 local function hasEarpiece()
@@ -15,8 +15,6 @@ local function setProximityBlocked(blocked)
     LocalPlayer.state:set('disableProximity', blocked and true or nil, true)
 end
 
---- Earpiece: radio PTT is private (nearby players cannot hear your mic).
---- No earpiece: leave proximity alone so people next to you hear you talk into the radio.
 AddEventHandler('pma-voice:radioActive', function(active)
     if active and hasEarpiece() then
         setProximityBlocked(true)
@@ -25,7 +23,6 @@ AddEventHandler('pma-voice:radioActive', function(active)
     end
 end)
 
--- Track who is transmitting on which channel (works even if talker is far away)
 AddStateBagChangeHandler('radioActive', '', function(bagName, _, value)
     local serverId = tonumber(bagName:match('player:(%d+)'))
     if not serverId or serverId == cache.serverId then return end
@@ -66,7 +63,6 @@ local function clearAllOverhear()
     overhearing = {}
 end
 
--- Stand near someone on radio without an earpiece → hear their channel through their speaker.
 CreateThread(function()
     local range = config.overhearRange or 3.0
 
@@ -78,7 +74,7 @@ CreateThread(function()
             local myServerId = cache.serverId
             local myCoords = GetEntityCoords(cache.ped)
             local myChannel = LocalPlayer.state.radioChannel or 0
-            local openChannels = {} ---@type table<number, boolean>
+            local openChannels = {}
 
             local players = GetActivePlayers()
             for i = 1, #players do
@@ -108,7 +104,6 @@ CreateThread(function()
                     startOverhear(talkerId)
                     overhearing[talkerId] = true
                 else
-                    -- refresh volume / listen in case mumble reconnected
                     startOverhear(talkerId)
                 end
             end

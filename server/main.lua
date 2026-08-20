@@ -7,14 +7,10 @@ local shadowItem = config.shadowItem or 'shadow_module'
 local radioStash = config.radioStash or { slots = 5, weight = 1000 }
 local ox_inventory = exports.ox_inventory
 
----@type table<string, true>
 local registeredStashes = {}
 
----@type table<number, { channel: number, name: string, invisible: boolean, talking: boolean }>
 local radioPlayers = {}
 
----Players who are eligible to be shadow-hidden (job or item) but chose to be visible anyway.
----@type table<number, true>
 local shadowOptOut = {}
 
 local function chatMsg(src, message)
@@ -28,7 +24,6 @@ end
 local function formatFrequency(channel)
     channel = tonumber(channel) or 0
     if channel <= 0 then return 'none' end
-    -- Use %d / %.2f only — ('%s.00'):format(55.0) becomes "55.0.00 MHz" in Lua.
     if channel % 1 > 0 then
         return ('%.2f MHz'):format(channel)
     end
@@ -57,7 +52,6 @@ local function stashIdFor(radioId)
 end
 
 local function registerRadioStash(radioId)
-    -- Always re-register so opens still work after ox_inventory restarts.
     ox_inventory:RegisterStash(
         stashIdFor(radioId),
         'Radio Storage',
@@ -125,22 +119,15 @@ local function hasAutoJobShadow(src)
     return autoJobs[player.PlayerData.job.name] == true
 end
 
----@param src number
----@return boolean eligible True if src qualifies for shadow mode (job or shadow_module item), regardless of opt-out.
 local function isShadowEligible(src)
     return hasAutoJobShadow(src) or hasShadowModuleInRadios(src)
 end
 
----@param src number
----@return boolean invisible True if src should actually be hidden right now.
 local function isRadioInvisible(src)
     if shadowOptOut[src] then return false end
     return isShadowEligible(src)
 end
 
----Pushes both the eligibility and active-state statebags so the NUI settings toggle can react live.
----@param src number
----@param invisible boolean
 local function setShadowState(src, invisible)
     Player(src).state:set('radioShadowEligible', isShadowEligible(src), true)
     Player(src).state:set('radioShadow', invisible, true)
