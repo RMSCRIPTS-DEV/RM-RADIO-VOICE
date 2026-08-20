@@ -1,29 +1,25 @@
 return {
-    -- Inventory item that makes radio private (no speaker leak to nearby players)
+    -- Makes radio private: no speaker leak to nearby players
     earpieceItem = 'earpiece',
 
-    -- Item placed inside radio storage that hides you from channel member lists
+    -- Hides you from the channel member list
     shadowItem = 'shadow_module',
 
-    -- Radio storage (opened from inventory "Open storage" button, same idea as fd_laptop)
-    -- 5 slots → ox_inventory grid renders as 5x1
+    -- Opened from the inventory "Open storage" button
     radioStash = {
         slots = 5,
         weight = 1000,
     },
 
-    -- Jobs that are radio-invisible without needing shadow_module.
-    -- Set to false so everyone (including these jobs) must have the item in radio storage.
+    -- Radio-invisible without needing shadow_module. Set to false to require the item for everyone.
     shadowAutoJobs = {
         police = true,
         ambulance = true,
     },
 
-    -- If false restrictedChannels restricts all decimals, if true you need to manually add each subchannel (100.01, 100.02 etc)
+    -- false = restrictedChannels blocks all decimals of a channel; true = only the exact subchannels listed (e.g. 100.01, 100.02)
     whitelistSubChannels = false,
-    
-    ---@alias channelNumber number
-    ---@type table<channelNumber, {jobName: boolean, jobName2: boolean}>
+
     restrictedChannels = {
         [1] = {
             police = true,
