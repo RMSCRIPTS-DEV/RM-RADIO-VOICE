@@ -43,7 +43,8 @@
    ensure rm-radios
    ```
 
-4. Edit channel restrictions in `config/shared.lua`, and voice/UX defaults in `config/client.lua`.
+4. Add the `ox_inventory` items — see [`install/README.md`](./install/README.md) for the copy-paste snippet and item images.
+5. Edit channel restrictions in `config/shared.lua`, and voice/UX defaults in `config/client.lua`.
 
 ## Configuration
 
