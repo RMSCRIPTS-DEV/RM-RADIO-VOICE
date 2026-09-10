@@ -70,9 +70,16 @@
 | `overhearRange` | Distance nearby players can overhear radio traffic leaking from a speaker (no earpiece) |
 | `overhearVolume` | Volume (0.0–1.0) of overheard radio, lower than normal so it reads as a speaker |
 
+## Radio storage
+
+Every radio item carries its own small stash (`radioStash` in `config/shared.lua` — 5 slots by default), used to hold the `shadowItem`. Two ways to open it, both go through the same server-side check that you actually own that radio:
+
+1. **From the inventory** — right-click the radio item and use its "Open storage" context button.
+2. **From the radio app itself** — the Package icon next to Power/Close in the radio panel header opens the currently-active radio's storage directly, no need to back out to the inventory.
+
 ## Shadow / anonymous mode
 
-Players eligible for shadow mode (`shadowAutoJobs` job, or `shadowItem` in their radio's storage) get an **Anonymous** toggle in the radio Settings tab, letting them opt in or out of being hidden from other members' channel lists. Ineligible players see the toggle disabled with a hint pointing at the required item.
+Drop `shadowItem` (default `shadow_module`, see [Configuration](#configuration)) into a radio's storage (see [Radio storage](#radio-storage) above) to make that radio's holder eligible for shadow mode. Players eligible for shadow mode (`shadowAutoJobs` job, or `shadowItem` in their radio's storage) get an **Anonymous** toggle in the radio Settings tab, letting them opt in or out of being hidden from other members' channel lists. Ineligible players see the toggle disabled with a hint pointing at the required item.
 
 ## Client exports
 

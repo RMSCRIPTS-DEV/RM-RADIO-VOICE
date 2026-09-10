@@ -7,6 +7,7 @@ import {
   Megaphone,
   Mic,
   MicOff,
+  Package,
   Pencil,
   PhoneOff,
   Plus,
@@ -230,6 +231,11 @@ export function RadioDashboard({ visible }: RadioDashboardProps) {
       channel: result === 'on' ? channel : 0,
     });
     if (result !== 'on') setChatOpen(false);
+  };
+
+  const handleOpenStorage = async () => {
+    if (isEnvBrowser()) return;
+    await fetchNui('openStorage');
   };
 
   const handleVolume = async (direction: 'up' | 'down') => {
@@ -473,6 +479,15 @@ export function RadioDashboard({ visible }: RadioDashboardProps) {
                   title="Close menu (Esc)"
                 >
                   <X size={15} strokeWidth={2.2} />
+                </button>
+                <button
+                  type="button"
+                  className="radio-btn radio-btn--icon"
+                  onClick={() => void handleOpenStorage()}
+                  aria-label="Open radio storage"
+                  title="Open storage - put a Shadow Module here to hide from the member list"
+                >
+                  <Package size={15} strokeWidth={2.2} />
                 </button>
                 <button
                   type="button"

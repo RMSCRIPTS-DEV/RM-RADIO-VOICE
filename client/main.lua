@@ -809,6 +809,30 @@ RegisterNUICallback('escape', function(_, cb)
     cb('ok')
 end)
 
+-- Opens the active radio's storage (5-slot stash - shadow_module goes here to hide from the
+-- channel member list) straight from the radio app itself, instead of making the player back
+-- out to their inventory and use the item's own "Open storage" context button. Reuses the exact
+-- same server-side flow as that button (at-radio:server:openRadioStorage) - the only new part
+-- is looking up which inventory slot the active radio is currently in, client-side, the same
+-- way pickActiveRadioId's ownership check already does.
+RegisterNUICallback('openStorage', function(_, cb)
+    local radioId = pickActiveRadioId()
+    if not radioId then cb('no_radio') return end
+
+    local slot
+    for _, radio in ipairs(getPlayerRadios()) do
+        if radio.metadata and radio.metadata.id == radioId then
+            slot = radio.slot
+            break
+        end
+    end
+
+    if not slot then cb('no_radio') return end
+
+    TriggerServerEvent('at-radio:server:openRadioStorage', slot)
+    cb('ok')
+end)
+
 RegisterNUICallback('getRadioState', function(_, cb)
     cb({
         onRadio = onRadio,
